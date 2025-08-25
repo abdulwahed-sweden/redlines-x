@@ -1,6 +1,6 @@
 // src/modules/auxiliary/sql_injection.rs
 
-/// Main SQL Injection scanning module (minimal placeholder)
+use crate::core::scan_result::ScanResult;
 
 pub struct SqlInjectionScanner;
 
@@ -9,9 +9,9 @@ impl SqlInjectionScanner {
         Self {}
     }
 
-    /// Run a scan on the given URL, returns success message
-    pub async fn run_scan(&self, url: &str) -> String {
+    /// Run a scan on the given target URL, returns ScanResult
+    pub async fn run_scan(&self, target: &str) -> ScanResult {
         // TODO: implement actual scanning logic here
-        format!("Pretend scanning SQL Injection on URL: {}", url)
+        ScanResult::new(true, format!("Pretend scanning SQL Injection on URL: {}", target))
     }
 }

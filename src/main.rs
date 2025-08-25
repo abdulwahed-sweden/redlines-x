@@ -1,20 +1,22 @@
 // src/main.rs
-mod core;
-mod cli;
-mod modules;  // Add this line
+pub mod core;
+pub mod modules;  // This line must be added to expose `modules`
+pub mod cli;
 
-use core::session::SessionManager;
-use core::module_handler::ModuleHandler;
-use core::database::Database;
+
 
 #[tokio::main]
 async fn main() {
     println!("Welcome to Redlines X - Advanced Security Scanner");
 
-    // Construct minimal instances to avoid dead_code warnings
-    let _session = SessionManager::new();
-    let _module_handler = ModuleHandler::new();
-    let _database = Database::new();
+    // Example of session and database usage
+    let mut session = core::session::Session::new("https://example.com");
+    session.add_cookie("sessionid", "abcd1234");
+
+    let db = core::database::Database::new().expect("Failed to open database");
+    db.save_session(&session).expect("Failed to save session");
+
+    println!("Session saved with ID: {}", session.id);
 
     cli::run_cli().await;
 }

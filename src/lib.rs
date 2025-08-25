@@ -1,5 +1,3 @@
-// src/main.rs
-
-mod core;
-mod cli;
-mod modules;  // Add this line
+pub mod core;
+pub mod modules;
+pub mod cli;
