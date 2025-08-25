@@ -1,7 +1,9 @@
 // src/cli/mod.rs
 
 use clap::{Parser, Subcommand};
-use crate::modules::auxiliary::sql_injection::SqlInjectionScanner;
+// Import the SQLInjectionScanner type from its module
+use crate::modules::auxiliary::sql_injection::SQLInjectionScanner;
+
 
 #[derive(Parser)]
 #[command(name = "redlines-x")]
@@ -30,7 +32,7 @@ pub async fn run_cli() {
     match cli.command {
         Commands::SqlInjection { url } => {
             println!("Running SQL Injection scan on: {}", url);
-            let scanner = SqlInjectionScanner::new();
+            let scanner = SQLInjectionScanner::new();
             let result = scanner.run_scan(&url).await;
             println!("{:?}", result);
         }
